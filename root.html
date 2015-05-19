@@ -7,10 +7,15 @@
     <a class="active item"><i class="privacy icon"></i> {{> loginButtons}}</a>
     <span class="item"> {{voteCount}}</span>
   </div>
-  <h1>On next</h1>
+  <h1>On now/next</h1>
   <div class="ui cards">
     {{#each videos}}
       {{> video}}
     {{/each}}
+   
   </div>
+  <h2>With votes </h2>
+  {{#each videosWithVotes}}
+    {{> video}}
+  {{/each}}
 </body>

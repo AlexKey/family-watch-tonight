@@ -1,10 +1,14 @@
 
 Template.body.helpers({
   voteCount: function() {
-    return Votes.find().count();
+    return Votes.find().count(); //reactive data source so is live
   },
   videos: function() {
     return Videos.find();
+  },
+  videosWithVotes: function() {
+    
+    return Videos.find({ "_id": { $in: [ '1', '2' ] } });
   }
 });
 
@@ -15,4 +19,6 @@ Template.video.events({
   }
 });
 
-
+Template.video.rendered = function(){
+  $('.progress').progress({ total: 5 });
+}
