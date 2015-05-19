@@ -1,0 +1,16 @@
+<head>
+  <title>Family Bookmarks</title>
+</head>
+<body style="padding:20px;">
+  <div class="ui menu">
+    <a class="active item"><i class="home icon"></i> home</a>
+    <a class="active item"><i class="privacy icon"></i> {{> loginButtons}}</a>
+    <span class="item"> {{voteCount}}</span>
+  </div>
+  <h1>On next</h1>
+  <div class="ui cards">
+    {{#each videos}}
+      {{> video}}
+    {{/each}}
+  </div>
+</body>
