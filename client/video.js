@@ -8,8 +8,6 @@ Template.body.helpers({
   }
 });
 
-
-
 Template.video.events({
   "click .vote": function (event) {
     //this runs a simulation to handle latency compensation.
