@@ -24,7 +24,7 @@ Template.body.helpers({
 });
 
 Template.video.events({
-  "click .vote": function (event) {
+  "click .vote": function (event, instance) {
     //this runs a simulation to handle latency compensation.
     Meteor.call("vote", this._id);
 
@@ -39,11 +39,14 @@ Template.video.rendered = function(){
    var self = this;
    
   $('.progress').progress();
+ 
   
   //make itself relient on it's dom changes
   self.autorun(function () {
-    Template.currentData();
-    Template.instance().$.closest(".card").find(".progress").progress();
+    var data = Template.currentData();
+    
+    //suprisingly tricky to get the correct syntax!!
+    Template.instance().$(".progress").progress({value: data.votes});
   });
 }
 
