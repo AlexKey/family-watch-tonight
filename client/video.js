@@ -20,8 +20,10 @@ Template.video.events({
     //this runs a simulation to handle latency compensation.
     Meteor.call("vote", this._id); 
  
+    //TODO: Get how many votes there are
+ 
     //You would of thought I'd get a value back here to update the progress bar?
-    $(event.target).closest(".card").find(".progress").progress("increament");
+    $(event.target).closest(".card").find(".progress").progress("increament"); 
   }
 });
 
