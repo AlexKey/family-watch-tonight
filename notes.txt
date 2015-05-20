@@ -1,0 +1,8 @@
+	    
+		db.videos.insert(
+		{
+	      "thumbnail": "http://cdn1.blinkboxmedia.com/i/contentasset31/000/065/531/vebpllyh/v=308/w=1408;h=634;rm=CropBottom;q=70/image.jpg",
+	      "title": "Zombeavers",
+	      "meta": "Adsasd",
+	      "description": "Lorem ipsum"
+	    });

@@ -31,12 +31,12 @@ Template.video.events({
     //TODO: Get how many votes there are
 
     //You would of thought I'd get a value back here to update the progress bar?
-    $(event.target).closest(".card").find(".progress").progress("increament");
+    $(event.target).closest(".card").find(".progress").progress("increment");
   }
 });
 
 Template.video.rendered = function(){
-  $('.progress').progress({ total: 5 });
+  $('.progress').progress();
 }
 
 Tracker.autorun(function() {
