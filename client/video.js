@@ -14,12 +14,16 @@ Template.body.helpers({
 
     return _.map(videos, function(video, index) {
       video.votes =  _.where(votes, { videoId: video._id }).length;
+      video.totalUsers = Presences.find().count();
       return video;
     });
   },
   videosWithVotes: function() {
 
     return Videos.find({ "_id": { $in: [ '1', '2' ] } });
+  },
+  totalUsers: function() {
+    return Presences.find().count();
   }
 });
 
@@ -27,11 +31,7 @@ Template.video.events({
   "click .vote": function (event, instance) {
     //this runs a simulation to handle latency compensation.
     Meteor.call("vote", this._id);
-
-    //TODO: Get how many votes there are
-
     //You would of thought I'd get a value back here to update the progress bar?
-    //$(event.target).closest(".card").find(".progress").progress("increment");
   }
 });
 
@@ -46,7 +46,7 @@ Template.video.rendered = function(){
     var data = Template.currentData();
     
     //suprisingly tricky to get the correct syntax!!
-    Template.instance().$(".progress").progress({value: data.votes});
+    Template.instance().$(".progress").progress({value: data.votes, total: data.totalUsers});
   });
 }
 
