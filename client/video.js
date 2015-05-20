@@ -36,10 +36,14 @@ Template.video.events({
 });
 
 Template.video.rendered = function(){
+   var self = this;
+   
   $('.progress').progress();
+  
+  //make itself relient on it's dom changes
+  self.autorun(function () {
+    Template.currentData();
+    Template.instance().$.closest(".card").find(".progress").progress();
+  });
 }
 
-Tracker.autorun(function() {
-
-
-});
