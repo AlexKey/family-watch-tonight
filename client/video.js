@@ -1,4 +1,4 @@
-/* global Template */
+/* global ; */
 /* global Videos */
 /* global Votes */
 
@@ -7,10 +7,18 @@ Template.body.helpers({
     return Votes.find().count(); //reactive data source so is live
   },
   videos: function() {
-    return Videos.find();
+    var videos = Videos.find().fetch();
+
+    //cheating, joins are weird - instead using the "over subscribe technique"
+    var votes = Votes.find().fetch();
+
+    return _.map(videos, function(video, index) {
+      video.votes =  _.where(votes, { videoId: video._id }).length;
+      return video;
+    });
   },
   videosWithVotes: function() {
-    
+
     return Videos.find({ "_id": { $in: [ '1', '2' ] } });
   }
 });
@@ -18,12 +26,12 @@ Template.body.helpers({
 Template.video.events({
   "click .vote": function (event) {
     //this runs a simulation to handle latency compensation.
-    Meteor.call("vote", this._id); 
- 
+    Meteor.call("vote", this._id);
+
     //TODO: Get how many votes there are
- 
+
     //You would of thought I'd get a value back here to update the progress bar?
-    $(event.target).closest(".card").find(".progress").progress("increament"); 
+    $(event.target).closest(".card").find(".progress").progress("increament");
   }
 });
 
@@ -32,6 +40,6 @@ Template.video.rendered = function(){
 }
 
 Tracker.autorun(function() {
-	
-  
+
+
 });
