@@ -9,7 +9,7 @@ Meteor.methods({
 //    if (Meteor.isServer) {
 //      Meteor._sleepForMs(5000); // wait for 5 seconds
 //    }
-    
+    console.log("called insert");
     Votes.insert({
       videoId: videoId,
       createdAt: new Date(), // current time

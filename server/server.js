@@ -4,4 +4,5 @@ Meteor.publish("votes", function () {
   
 Meteor.publish("videos", function () {
   return Videos.find();
+  
 });
