@@ -9,12 +9,27 @@ Meteor.methods({
 //    if (Meteor.isServer) {
 //      Meteor._sleepForMs(5000); // wait for 5 seconds
 //    }
-    console.log("called insert");
-    Votes.insert({
-      videoId: videoId,
-      createdAt: new Date(), // current time
-      owner: Meteor.userId()
-    });
-   
+    
+    //var myNumOfVotes = Session.get("myNumOfVotes");
+    
+    if(Votes.find({ videoId: videoId, owner: Meteor.userId()  }).count() > 0) {
+      
+      Votes.remove({
+        videoId: videoId,
+        owner: Meteor.userId()
+      });
+        
+      //Session.set("myNumOfVotes", --myNumOfVotes);
+         
+    } else {
+      Votes.insert({
+        videoId: videoId,
+        createdAt: new Date(), // current time
+        owner: Meteor.userId()
+      });
+        
+      //Session.set("myNumOfVotes", ++myNumOfVotes);
+    }
+    
   }
 });

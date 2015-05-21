@@ -15,8 +15,9 @@
       <div class="bar">
       </div>
     </div>
-    <button class="ui bottom attached button vote {{#if votingIsDone}} disabled {{/if}}" disabled="{{votingIsDone}}">
-      <div class="label"><i class="star icon"></i>Vote</div>
+    
+    <button class="ui bottom attached button vote">
+      <div class="label"><i class="star icon {{#if hasVote}} yellow {{/if}}"></i>Vote</div>
     </button>
   </div>
 </template>

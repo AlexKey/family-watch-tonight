@@ -49,11 +49,14 @@ Template.body.helpers({
 
 
 Template.video.events({
-  "click .vote": function (event, instance) {
+  "click .vote": function (event, template) {
     //this runs a simulation to handle latency compensation.
     Meteor.call("vote", this._id);
     
-    //You would of thought I'd get a value back here to update the progress bar?
+    //You would of thought I'd get a value back here to update the progress bar - nope it's reactive baby?
+    
+    var hasVote = template.hasVote.get();
+    template.hasVote.set(!hasVote);
   }
 });
 
@@ -70,10 +73,13 @@ Template.video.helpers({
   },
   votingIsDone: function() {
     return votingIsDone();
-  }  
+  },
+  hasVote: function() {
+    return Template.instance().hasVote.get();
+  }
 });
 
-Template.video.rendered = function(){
+Template.video.onRendered(function(){
    var self = this;
    
   $('.progress').progress();
@@ -85,5 +91,10 @@ Template.video.rendered = function(){
     //suprisingly tricky to get the correct syntax!!
     Template.instance().$(".progress").progress({value: data.votes, total: data.votesNeeded });
   });
-}
+});
 
+
+Template.video.onCreated(function() {
+  this.hasVote = new ReactiveVar;
+  this.hasVote.set(false);
+});
