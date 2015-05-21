@@ -16,3 +16,5 @@ accounts-google
 service-configuration
 underscore
 tmeasday:presence
+reactive-var
+mizzao:user-status

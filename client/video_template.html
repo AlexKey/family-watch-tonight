@@ -11,11 +11,11 @@
       <div class="description">{{description}}</div>
     </div>
 
-    <div class="ui bottom attached progress" data-total="{{totalUsers}}" data-value="{{votes}}">
+    <div class="ui bottom attached progress" data-total="{{votesNeeded}}" data-value="{{votes}}">
       <div class="bar">
       </div>
     </div>
-    <button class="ui bottom attached button vote">
+    <button class="ui bottom attached button vote {{#if votingIsDone}} disabled {{/if}}" disabled="{{votingIsDone}}">
       <div class="label"><i class="star icon"></i>Vote</div>
     </button>
   </div>

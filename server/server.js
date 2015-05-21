@@ -15,7 +15,18 @@ Meteor.publish('userPresence', function() {
 
   // If for example we wanted to publish only logged in users we could apply:
   // filter = { userId: { $exists: true }};
-  var filter = {}; 
+  var filter = { userId: { $exists: true }}; 
 
   return Presences.find(filter, { fields: { state: true, userId: true }});
+});
+
+
+Meteor.users.find({ "status.online": true }).observe({
+  added: function(user) {
+    console.log("add: " + user._id);
+  },
+  removed: function(user) {
+    console.log("remove: " + user._id);
+    Votes.remove({ owner : user._id });
+  }
 });
