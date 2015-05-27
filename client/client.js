@@ -4,5 +4,3 @@ Meteor.subscribe("videos");
 Meteor.subscribe("votes");
 
 Meteor.subscribe('userPresence');
-
-

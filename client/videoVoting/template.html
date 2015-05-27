@@ -1,0 +1,23 @@
+<template name="video">
+  <div class="card">
+    <a class="image">
+      <img src="{{thumbnail}}">
+    </a>
+    <div class="content">
+      <a class="header">{{title}}</a>
+      <div class="meta">
+        <a>{{meta}}</a>
+      </div>
+      <div class="description">{{description}}</div>
+    </div>
+
+    <div class="ui bottom attached progress" data-total="{{votesNeeded}}" data-value="{{voteCount}}">
+      <div class="bar">
+      </div>
+    </div>
+    
+    <button class="ui bottom attached button vote" {{attributes}}>
+      <div class="label"><i class="star icon {{#if hasVote}} yellow {{/if}}"></i>Vote</div>
+    </button>
+  </div>
+</template>
