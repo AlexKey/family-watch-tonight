@@ -1,31 +1,24 @@
-/*
 
 var SwaggerClient = Meteor.npmRequire("swagger-client");
-var getPetByIdFibre = null;
-
-var PetClient = new SwaggerClient({
-  url: 'http://petstore.swagger.io/v2/swagger.json',
-
-  sucess: function() {
-
-    getPetByIdFibre = Meteor.wrapAsync(PetClient.apis.pet.getPetById);
-  }
-}); //should have success callback, but I'm not sure how to wrap this up.
-
 
 Meteor.methods({
   "getPets" : function() {
-    //var result = getPetByIdFibre({petId:1}); //return either the response as a trackable item or perhaps the function call.
-    //console.log(result);
 
-    //return result;
+    var PetClient = new SwaggerClient({
+      url: 'http://petstore.swagger.io/v2/swagger.json',
 
-    getPetByIdFibre = Meteor.wrapAsync(PetClient.apis.pet.getPetById);
-    return getPetByIdFibre({petId: 1});
+      sucess: function() {
+
+        var getPetByIdFibre = Meteor.wrapAsync(PetClient.apis.pet.getPetById);
+
+        return PetClient.apis.pet.getPetById({petId: 1}); //getPetByIdFibre({petId: 1});
+
+      }
+    });
 
   }
 });
-*/
+
 
 Meteor.publish("votes", function () {
   return Votes.find(); //publish a cursor of a query
